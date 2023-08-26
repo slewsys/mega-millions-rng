@@ -1,0 +1,39 @@
+{
+  "name": "mega-millions-rng",
+  "version": "1.0.0",
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-syntax-top-level-await"
+    ]
+  },
+  "description": "Mega Millions Lottery random number generator",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "mega-millions-rng": "./index.js"
+  },
+  "repository": "github:slewsys/mega-millions-rng",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "mega-millions-rng-test": "status=0; i=0; for n in $(./index.js | sed -E 's/[^[:digit:]]+/ /g'); do if (( ++i <= 5 )); then (( 1 <= n && n <= 70 )) || { printf 'Number %d: %d: Out of range [1-70]' $i $n >&2; (( ++status )); }; else (( 1 <= n && n <= 25 )) || { printf 'Number %d: %d: Out of range [1-25]' $i $n >&2; (( ++status )); }; fi; done;  (( status == 0 )) && printf 'PASS\n' || printf '\nFAIL\n'",
+    "test": "for x in $(seq 10); do npm run mega-millions-rng-test; done"
+  },
+  "keywords": [
+    "mega",
+    "millions",
+    "cryptographically",
+    "secure",
+    "uniformly",
+    "distributed",
+    "random",
+    "number",
+    "generator"
+  ],
+  "author": "Andrew L. Moore",
+  "license": "MIT"
+}
